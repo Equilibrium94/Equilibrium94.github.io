@@ -1,7 +1,21 @@
 <!DOCTYPE html>
-<html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-</body>
+<html lang="en">
+  <head>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  </head>
+  <body>
+
+    <p> hi </p>
+  </body>
+
+  <script>
+
+
+   $.getJSON("LEA.json", function(json) {
+      console.log(json); // this will show the info it in firebug console
+   });
+
+
+  </script>
 </html>
