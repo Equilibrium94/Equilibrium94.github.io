@@ -870,8 +870,10 @@
     ]
   }
 */
-  var set = $.getJSON("LEA.json", function(json) {
+  var set;
+  $.getJSON("LEA.json", function(json) {
     console.log(json); // this will show the info it in firebug console
+    set = json;
   });
 
 
