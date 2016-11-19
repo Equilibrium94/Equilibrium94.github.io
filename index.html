@@ -872,13 +872,14 @@
 */
   var set = $.getJSON("LEA.json", function(json) {
     console.log(json); // this will show the info it in firebug console
-});
+  });
 
 
   window.onload = init;
 
   function init() {
-
+    alert("hey");
+    alert(set.cards[9].name);
     var i, leftCardElement;
     for (i in set.cards) {
 
