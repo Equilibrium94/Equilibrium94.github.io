@@ -881,14 +881,15 @@
 
     var i, leftCardElement;
     for (i in set.cards) {
-        leftCardElement = document.createElement("p");
+
+      leftCardElement = document.createElement("p");
       //  leftCardElement.setAttribute("id", "live-search-list");
+      console.console.log(set.cards[i].name);
+      leftCardElement.innerHTML = set.cards[i].points + "&nbsp;" + set.cards[i].name;
+      leftCardElement.addEventListener("click", leftCardClicked.bind(this, set.cards[i]));
+      leftCardElement.addEventListener("mouseover", cardHovered.bind(this, set.cards[i]));
 
-        leftCardElement.innerHTML = set.cards[i].points + "&nbsp;" + set.cards[i].name;
-        leftCardElement.addEventListener("click", leftCardClicked.bind(this, set.cards[i]));
-        leftCardElement.addEventListener("mouseover", cardHovered.bind(this, set.cards[i]));
-
-        document.getElementById("left-column").appendChild(leftCardElement);
+      document.getElementById("left-column").appendChild(leftCardElement);
     }
   }
 
