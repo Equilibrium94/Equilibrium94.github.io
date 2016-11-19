@@ -1,20 +1,1028 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <style>
+      #header {
+        text-align: center;
+
+      }
+      #header-table {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #the-table {
+        margin-left: 3cm;
+      }
+
+      #right-column {
+        vertical-align:top;
+      }
+      #image-column {
+        vertical-align:top;
+      }
+
+      #left-column {
+        overflow: auto;
+        height: 200;
+      }
+      #right-colume {
+        margin-left: 2cm;
+      }
+      .points {
+        text-align: center;
+      }
+      td
+      {
+        padding:0 15px 0 15px;
+      }
+
+    </style>
+
+	  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+
   </head>
   <body>
 
-    <p> hi </p>
+    <table id="header-table">
+      <tr>
+        <td>
+          <div id="header">
+            <h1> 300 Point 93/94 </h1>
+            <p> Each card has points based on its power level. &nbsp; Build an <a href="http://www.eternalcentral.com/9394rules/">Eternal Central Legal</a> deck with up to 300 points.  </p>
+          </div>
+
+          <table id="the-table">
+            <tr>
+              <input type="text" class="live-search-box" placeholder="search here" />
+
+              <p> </p>
+              <!--  <span> Sort by: </span> <span> Points /</span> <span> Name /</span> <span> Color </span>
+
+              <span> Show: <span> <span> White /<span> <span> Blue /</span> <span> Black /</span> <span> Red /</span> <span> Green /</span>
+              <span> Artifact /</span> <span> Land /</span> <span> Creature /</span> <span> Instant /</span> <span> Sorcery </span> -->
+              <td id="left-column">
+
+              </td>
+              <td id="right-column">
+                <div class="flex-item" id="right-column"></div>
+              </td>
+            </tr>
+          </table>
+
+
+
+        </td>
+        <td id="image-column">
+          <span><img class="cardPreview" id="cardPreview" src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=250&type=card"></img></span>
+          <p></p>
+          <span class="points" id="point-count">0 Points</span>
+          <span> &nbsp; </span>
+          <span class="points" id="card-count">0 Cards</span>
+        </td>
+      </tr>
+    </table>
+
+
+
+
+
   </body>
 
   <script>
+/*
+  var set = {
+    "name": "Limited Edition Alpha",
+    "code": "LEA",
+    "gathererCode": "1E",
+    "magicCardsInfoCode": "al",
+    "releaseDate": "1993-08-05",
+    "border": "black",
+    "type": "core",
+    "booster": [
+      "rare",
+      "uncommon",
+      "uncommon",
+      "uncommon",
+      "common",
+      "common",
+      "common",
+      "common",
+      "common",
+      "common",
+      "common",
+      "common",
+      "common",
+      "common",
+      "common"
+    ],
+    "mkm_name": "Alpha",
+    "mkm_id": 1,
+    "cards": [
+      {
+        "artist": "Richard Thomas",
+        "cmc": 5,
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "Blue"
+        ],
+        "flavor": "These spirits of the air are winsome and wild, and cannot be truly contained. Only marginally intelligent, they often substitute whimsy for strategy, delighting in mischief and mayhem.",
+        "id": "926234c2fe8863f49220a878346c4c5ca79b6046",
+        "imageName": "air elemental",
+        "layout": "normal",
+        "manaCost": "{3}{U}{U}",
+        "mciNumber": "47",
+        "multiverseid": 94,
+        "name": "Air Elemental",
+        "points": "15",
+        "power": "4",
+        "rarity": "Uncommon",
+        "subtypes": [
+          "Elemental"
+        ],
+        "text": "Flying",
+        "toughness": "4",
+        "type": "Creature — Elemental",
+        "types": [
+          "Creature"
+        ]
+      },
+      {
+        "artist": "Mark Poole",
+        "cmc": 1,
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "Blue"
+        ],
+        "id": "aa74b7dc3b30b2e7559598f983543755e226811d",
+        "imageName": "ancestral recall",
+        "layout": "normal",
+        "manaCost": "{U}",
+        "mciNumber": "48",
+        "multiverseid": 95,
+        "name": "Ancestral Recall",
+        "points": "20",
+        "rarity": "Rare",
+        "reserved": true,
+        "text": "Target player draws three cards.",
+        "type": "Instant",
+        "types": [
+          "Instant"
+        ]
+      },
+      {
+        "artist": "Douglas Shuler",
+        "cmc": 4,
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "Blue"
+        ],
+        "id": "9d91ef4896ab4c1a5611d4d06971fc8026dd2f3f",
+        "imageName": "animate artifact",
+        "layout": "normal",
+        "manaCost": "{3}{U}",
+        "mciNumber": "49",
+        "multiverseid": 96,
+        "name": "Animate Artifact",
+        "points": "5",
+        "rarity": "Uncommon",
+        "subtypes": [
+          "Aura"
+        ],
+        "text": "Enchant artifact\nAs long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.",
+        "type": "Enchantment — Aura",
+        "types": [
+          "Enchantment"
+        ]
+      },
+      {
+        "artist": "Anson Maddocks",
+        "cmc": 3,
+        "colorIdentity": [
+          "B"
+        ],
+        "colors": [
+          "Black"
+        ],
+        "flavor": "The Wall of Bone is said to be an aspect of the Great Wall in Hel, where the bones of all sinners wait for Ragnarok, when Hela will call them forth for the final battle.",
+        "id": "2f0b759725168e728c3a52cc749c55b5155bd562",
+        "imageName": "wall of bone",
+        "layout": "normal",
+        "manaCost": "{2}{B}",
+        "mciNumber": "41",
+        "multiverseid": 88,
+        "name": "Wall of Bone",
+        "points": "5",
+        "power": "1",
+        "rarity": "Uncommon",
+        "subtypes": [
+          "Skeleton",
+          "Wall"
+        ],
+        "text": "Defender (This creature can't attack.)\n{B}: Regenerate Wall of Bone. (The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)",
+        "toughness": "4",
+        "type": "Creature — Skeleton Wall",
+        "types": [
+          "Creature"
+        ]
+      },
+      {
+        "artist": "Anson Maddocks",
+        "cmc": 3,
+        "colorIdentity": [
+          "G"
+        ],
+        "colors": [
+          "Green"
+        ],
+        "flavor": "\"What else, when chaos draws all forces inward to shape a single leaf.\"\n —Conrad Aiken",
+        "id": "ba1fa70fbb5179ba5022ef155cddf59825de473a",
+        "imageName": "wall of brambles",
+        "layout": "normal",
+        "manaCost": "{2}{G}",
+        "mciNumber": "132",
+        "multiverseid": 179,
+        "name": "Wall of Brambles",
+        "points": "5",
+        "power": "2",
+        "rarity": "Uncommon",
+        "subtypes": [
+          "Plant",
+          "Wall"
+        ],
+        "text": "Defender (This creature can't attack.)\n{G}: Regenerate Wall of Brambles.",
+        "toughness": "3",
+        "type": "Creature — Plant Wall",
+        "types": [
+          "Creature"
+        ]
+      },
+      {
+        "artist": "Richard Thomas",
+        "cmc": 3,
+        "colorIdentity": [
+          "R"
+        ],
+        "colors": [
+          "Red"
+        ],
+        "flavor": "Conjured from the bowels of hell, the fiery wall forms an impassable barrier, searing the soul of any creature attempting to pass through its terrible bursts of flame.",
+        "id": "f676060ed4a1cf97801ba9d0a4e78ac51ab2c31b",
+        "imageName": "wall of fire",
+        "layout": "normal",
+        "manaCost": "{1}{R}{R}",
+        "mciNumber": "182",
+        "multiverseid": 229,
+        "name": "Wall of Fire",
+        "points": "5",
+        "power": "0",
+        "rarity": "Uncommon",
+        "subtypes": [
+          "Wall"
+        ],
+        "text": "Defender (This creature can't attack.)\n{R}: Wall of Fire gets +1/+0 until end of turn.",
+        "toughness": "5",
+        "type": "Creature — Wall",
+        "types": [
+          "Creature"
+        ]
+      },
+      {
+        "artist": "Richard Thomas",
+        "cmc": 3,
+        "colorIdentity": [
+          "G"
+        ],
+        "colors": [
+          "Green"
+        ],
+        "flavor": "\"And through the drifts the snowy cliffs/ Did send a dismal sheen:/ Nor shapes of men nor beasts we ken—/ The ice was all between.\"/—Samuel Coleridge, \"The Rime of the Ancient Mariner\"",
+        "id": "c20650a0228566799f922bcfc5bf41be08dc47e3",
+        "imageName": "wall of ice",
+        "layout": "normal",
+        "manaCost": "{2}{G}",
+        "mciNumber": "133",
+        "multiverseid": 180,
+        "name": "Wall of Ice",
+        "points": "5",
+        "power": "0",
+        "rarity": "Uncommon",
+        "subtypes": [
+          "Wall"
+        ],
+        "text": "Defender (This creature can't attack.)",
+        "toughness": "7",
+        "type": "Creature — Wall",
+        "types": [
+          "Creature"
+        ]
+      },
+      {
+        "artist": "Dan Frazier",
+        "cmc": 3,
+        "colorIdentity": [
+          "R"
+        ],
+        "colors": [
+          "Red"
+        ],
+        "flavor": "The Earth herself lends her strength to these walls of living stone, which possess the stability of ancient mountains. These mighty bulwarks thwart ground-based troops, providing welcome relief for weary warriors who defend the land.",
+        "id": "555ddc8c5bf56ccc408900a3749f7b2e08d3918d",
+        "imageName": "wall of stone",
+        "layout": "normal",
+        "manaCost": "{1}{R}{R}",
+        "mciNumber": "183",
+        "multiverseid": 230,
+        "name": "Wall of Stone",
+        "points": "5",
+        "power": "0",
+        "rarity": "Uncommon",
+        "subtypes": [
+          "Wall"
+        ],
+        "text": "Defender (This creature can't attack.)",
+        "toughness": "8",
+        "type": "Creature — Wall",
+        "types": [
+          "Creature"
+        ]
+      },
+      {
+        "artist": "Mark Tedin",
+        "cmc": 4,
+        "colorIdentity": [
+          "W"
+        ],
+        "colors": [
+          "White"
+        ],
+        "flavor": "Just as the evil ones approached to slay Justina, she cast a great spell, imbuing her weapons with her own life force. Thus she fulfilled the prophecy: \"In the death of your savior will you find salvation.\"",
+        "id": "53dca07ac3cca588c51851f20c851f0dab8978ad",
+        "imageName": "wall of swords",
+        "layout": "normal",
+        "manaCost": "{3}{W}",
+        "mciNumber": "226",
+        "multiverseid": 273,
+        "name": "Wall of Swords",
+        "points": "5",
+        "power": "3",
+        "rarity": "Uncommon",
+        "subtypes": [
+          "Wall"
+        ],
+        "text": "Defender (This creature can't attack.)\nFlying",
+        "toughness": "5",
+        "type": "Creature — Wall",
+        "types": [
+          "Creature"
+        ]
+      },
+      {
+        "artist": "Richard Thomas",
+        "cmc": 3,
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "Blue"
+        ],
+        "flavor": "A deafening roar arose as the fury of an enormous vertical river supplanted our serenity. Eddies turned into whirling geysers, leveling everything in their path.",
+        "id": "2e2821cb1b915e6e48eeda9f8e3a657edd77e648",
+        "imageName": "wall of water",
+        "layout": "normal",
+        "manaCost": "{1}{U}{U}",
+        "mciNumber": "91",
+        "multiverseid": 138,
+        "name": "Wall of Water",
+        "points": "5",
+        "power": "0",
+        "rarity": "Uncommon",
+        "subtypes": [
+          "Wall"
+        ],
+        "text": "Defender (This creature can't attack.)\n{U}: Wall of Water gets +1/+0 until end of turn.",
+        "toughness": "5",
+        "type": "Creature — Wall",
+        "types": [
+          "Creature"
+        ]
+      },
+      {
+        "artist": "Mark Tedin",
+        "cmc": 1,
+        "colorIdentity": [
+          "G"
+        ],
+        "colors": [
+          "Green"
+        ],
+        "flavor": "Everybody knows that to ward off trouble, you knock on wood. But usually it's better to make a wall out of the wood and let trouble do the knocking.",
+        "id": "a5b5f051c6f6643f20e8419ba33a0399ee208434",
+        "imageName": "wall of wood",
+        "layout": "normal",
+        "manaCost": "{G}",
+        "mciNumber": "134",
+        "multiverseid": 181,
+        "name": "Wall of Wood",
+        "points": "5",
+        "power": "0",
+        "rarity": "Common",
+        "subtypes": [
+          "Wall"
+        ],
+        "text": "Defender (This creature can't attack.)",
+        "toughness": "3",
+        "type": "Creature — Wall",
+        "types": [
+          "Creature"
+        ]
+      },
+      {
+        "artist": "Cornelius Brudi",
+        "cmc": 3,
+        "colorIdentity": [
+          "G"
+        ],
+        "colors": [
+          "Green"
+        ],
+        "id": "a4a9f5c14440f1ea59edfeb51566293e217286ba",
+        "imageName": "wanderlust",
+        "layout": "normal",
+        "manaCost": "{2}{G}",
+        "mciNumber": "135",
+        "multiverseid": 182,
+        "name": "Wanderlust",
+        "points": "5",
+        "rarity": "Uncommon",
+        "subtypes": [
+          "Aura"
+        ],
+        "text": "Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, Wanderlust deals 1 damage to that player.",
+        "type": "Enchantment — Aura",
+        "types": [
+          "Enchantment"
+        ]
+      },
+      {
+        "artist": "Jeff A. Menges",
+        "cmc": 4,
+        "colorIdentity": [
+          "G"
+        ],
+        "colors": [
+          "Green"
+        ],
+        "flavor": "I didn't think Mammoths could ever hold a candle to a well-trained battle horse. Then one day I turned my back on a drunken soldier. His blow never landed; Mi'cha flung the brute over ten meters.",
+        "id": "950a9bc7b3da74a0acd333c24d262a7edb543bde",
+        "imageName": "war mammoth",
+        "layout": "normal",
+        "manaCost": "{3}{G}",
+        "mciNumber": "136",
+        "multiverseid": 183,
+        "name": "War Mammoth",
+        "points": "5",
+        "power": "3",
+        "rarity": "Common",
+        "subtypes": [
+          "Elephant"
+        ],
+        "text": "Trample",
+        "toughness": "3",
+        "type": "Creature — Elephant",
+        "types": [
+          "Creature"
+        ]
+      },
+      {
+        "artist": "Amy Weber",
+        "cmc": 2,
+        "colorIdentity": [
+          "B"
+        ],
+        "colors": [
+          "Black"
+        ],
+        "id": "605b10a85a67784739f6d119c4af869c32a798cd",
+        "imageName": "warp artifact",
+        "layout": "normal",
+        "manaCost": "{B}{B}",
+        "mciNumber": "42",
+        "multiverseid": 89,
+        "name": "Warp Artifact",
+        "points": "5",
+        "rarity": "Rare",
+        "subtypes": [
+          "Aura"
+        ],
+        "text": "Enchant artifact\nAt the beginning of the upkeep of enchanted artifact's controller, Warp Artifact deals 1 damage to that player.",
+        "type": "Enchantment — Aura",
+        "types": [
+          "Enchantment"
+        ]
+      },
+      {
+        "artist": "Jeff A. Menges",
+        "cmc": 5,
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "Blue"
+        ],
+        "flavor": "Unpredictable as the sea itself, Water Elementals shift without warning from tranquility to tempest. Capricious and fickle, they flow restlessly from one shape to another, expressing their moods with their physical forms.",
+        "id": "7453ec9f868fae69c33513bd1bb96ff1cf68f174",
+        "imageName": "water elemental",
+        "layout": "normal",
+        "manaCost": "{3}{U}{U}",
+        "mciNumber": "92",
+        "multiverseid": 139,
+        "name": "Water Elemental",
+        "points": "5",
+        "power": "5",
+        "rarity": "Uncommon",
+        "subtypes": [
+          "Elemental"
+        ],
+        "toughness": "4",
+        "type": "Creature — Elemental",
+        "types": [
+          "Creature"
+        ]
+      },
+      {
+        "artist": "Douglas Shuler",
+        "cmc": 1,
+        "colorIdentity": [
+          "B"
+        ],
+        "colors": [
+          "Black"
+        ],
+        "id": "ac2ba3d5174f6c0893af28fb34b7f58f99270e32",
+        "imageName": "weakness",
+        "layout": "normal",
+        "manaCost": "{B}",
+        "mciNumber": "43",
+        "multiverseid": 90,
+        "name": "Weakness",
+        "points": "5",
+        "rarity": "Common",
+        "subtypes": [
+          "Aura"
+        ],
+        "text": "Enchant creature\nEnchanted creature gets -2/-1.",
+        "type": "Enchantment — Aura",
+        "types": [
+          "Enchantment"
+        ]
+      },
+      {
+        "artist": "Rob Alexander",
+        "cmc": 1,
+        "colorIdentity": [
+          "G"
+        ],
+        "colors": [
+          "Green"
+        ],
+        "id": "600a7e79bacb4c23cd3174c5f5d2773399973126",
+        "imageName": "web",
+        "layout": "normal",
+        "manaCost": "{G}",
+        "mciNumber": "137",
+        "multiverseid": 184,
+        "name": "Web",
+        "points": "5",
+        "rarity": "Rare",
+        "subtypes": [
+          "Aura"
+        ],
+        "text": "Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature gets +0/+2 and has reach. (It can block creatures with flying.)",
+        "type": "Enchantment — Aura",
+        "types": [
+          "Enchantment"
+        ]
+      },
+      {
+        "artist": "Daniel Gelon",
+        "cmc": 3,
+        "colorIdentity": [
+          "R"
+        ],
+        "colors": [
+          "Red"
+        ],
+        "id": "227194aa6b54e106e49549c22de6a454efcbb53f",
+        "imageName": "wheel of fortune",
+        "layout": "normal",
+        "manaCost": "{2}{R}",
+        "mciNumber": "184",
+        "multiverseid": 231,
+        "name": "Wheel of Fortune",
+        "points": "5",
+        "rarity": "Rare",
+        "reserved": true,
+        "text": "Each player discards his or her hand, then draws seven cards.",
+        "type": "Sorcery",
+        "types": [
+          "Sorcery"
+        ]
+      },
+      {
+        "artist": "Daniel Gelon",
+        "cmc": 2,
+        "colorIdentity": [
+          "W"
+        ],
+        "colors": [
+          "White"
+        ],
+        "flavor": "Out of the blackness and stench of the engulfing swamp emerged a shimmering figure. Only the splattered armor and ichor-stained sword hinted at the unfathomable evil the knight had just laid waste.",
+        "id": "3b17913ad51d7528d682b4aee79c0d7bd8b09bfe",
+        "imageName": "white knight",
+        "layout": "normal",
+        "manaCost": "{W}{W}",
+        "mciNumber": "227",
+        "multiverseid": 274,
+        "name": "White Knight",
+        "points": "5",
+        "power": "2",
+        "rarity": "Uncommon",
+        "subtypes": [
+          "Human",
+          "Knight"
+        ],
+        "text": "First strike (This creature deals combat damage before creatures without first strike.)\nProtection from black (This creature can't be blocked, targeted, dealt damage, or enchanted by anything black.)",
+        "toughness": "2",
+        "type": "Creature — Human Knight",
+        "types": [
+          "Creature"
+        ]
+      },
+      {
+        "artist": "Dan Frazier",
+        "cmc": 1,
+        "colorIdentity": [
+          "W"
+        ],
+        "colors": [
+          "White"
+        ],
+        "id": "e9c760241387b134c122b824c7a36c67c434e954",
+        "imageName": "white ward",
+        "layout": "normal",
+        "manaCost": "{W}",
+        "mciNumber": "228",
+        "multiverseid": 275,
+        "name": "White Ward",
+        "points": "5",
+        "rarity": "Uncommon",
+        "subtypes": [
+          "Aura"
+        ],
+        "text": "Enchant creature\nEnchanted creature has protection from white. This effect doesn't remove White Ward.",
+        "type": "Enchantment — Aura",
+        "types": [
+          "Enchantment"
+        ]
+      },
+      {
+        "artist": "Mark Poole",
+        "cmc": 1,
+        "colorIdentity": [
+          "G"
+        ],
+        "colors": [
+          "Green"
+        ],
+        "id": "55dfa3a9478b03b45d170fb03ecadc52b32365a5",
+        "imageName": "wild growth",
+        "layout": "normal",
+        "manaCost": "{G}",
+        "mciNumber": "138",
+        "multiverseid": 185,
+        "name": "Wild Growth",
+        "points": "5",
+        "rarity": "Common",
+        "subtypes": [
+          "Aura"
+        ],
+        "text": "Enchant land\nWhenever enchanted land is tapped for mana, its controller adds {G} to his or her mana pool (in addition to the mana the land produces).",
+        "type": "Enchantment — Aura",
+        "types": [
+          "Enchantment"
+        ]
+      },
+      {
+        "artist": "Jesper Myrfors",
+        "cmc": 1,
+        "colorIdentity": [
+          "B"
+        ],
+        "colors": [
+          "Black"
+        ],
+        "flavor": "\"About, about in reel and rout\nThe death-fires danced at night;\nThe water, like a witch's oils,\nBurnt green, and blue and white.\"\n—Samuel Coleridge, \"The Rime of the Ancient Mariner\"",
+        "id": "470bbaafc91624492f2f886f88f7d8e023f84a11",
+        "imageName": "will-o'-the-wisp",
+        "layout": "normal",
+        "manaCost": "{B}",
+        "mciNumber": "44",
+        "multiverseid": 91,
+        "name": "Will-o'-the-Wisp",
+        "points": "5",
+        "power": "0",
+        "rarity": "Rare",
+        "subtypes": [
+          "Spirit"
+        ],
+        "text": "Flying (This creature can't be blocked except by creatures with flying or reach.)\n{B}: Regenerate Will-o'-the-Wisp. (The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)",
+        "toughness": "1",
+        "type": "Creature — Spirit",
+        "types": [
+          "Creature"
+        ]
+      },
+      {
+        "artist": "Mark Tedin",
+        "cmc": 2,
+        "id": "f034dd88217a45a79632bdf9dfd1a1e86588e5fc",
+        "imageName": "winter orb",
+        "layout": "normal",
+        "manaCost": "{2}",
+        "mciNumber": "275",
+        "multiverseid": 46,
+        "name": "Winter Orb",
+        "points": "20",
+        "rarity": "Rare",
+        "text": "Players can't untap more than one land during their untap steps.",
+        "type": "Artifact",
+        "types": [
+          "Artifact"
+        ]
+      },
+      {
+        "artist": "Mark Tedin",
+        "cmc": 1,
+        "id": "0f90d5db704e6a40ea1276117d977822d7b51d13",
+        "imageName": "wooden sphere",
+        "layout": "normal",
+        "manaCost": "{1}",
+        "mciNumber": "276",
+        "multiverseid": 47,
+        "name": "Wooden Sphere",
+        "points": "20",
+        "rarity": "Uncommon",
+        "text": "Whenever a player casts a green spell, you may pay {1}. If you do, you gain 1 life.",
+        "type": "Artifact",
+        "types": [
+          "Artifact"
+        ]
+      },
+      {
+        "artist": "Jesper Myrfors",
+        "cmc": 2,
+        "colorIdentity": [
+          "B"
+        ],
+        "colors": [
+          "Black"
+        ],
+        "id": "1d0c627974402ec94728412927e79d89d9f86c7b",
+        "imageName": "word of command",
+        "layout": "normal",
+        "manaCost": "{B}{B}",
+        "mciNumber": "45",
+        "multiverseid": 92,
+        "name": "Word of Command",
+        "points": "20",
+        "rarity": "Rare",
+        "reserved": true,
+        "text": "Look at target opponent's hand and choose a card from it. You control that player until Word of Command finishes resolving. The player plays that card if able. While doing so, the player can activate mana abilities only if they're from lands he or she controls and only if mana they produce is spent to activate other mana abilities of lands he or she controls and/or play that card. If the chosen card is cast as a spell, you control the player while that spell is resolving.",
+        "type": "Instant",
+        "types": [
+          "Instant"
+        ]
+      },
+      {
+        "artist": "Quinton Hoover",
+        "cmc": 4,
+        "colorIdentity": [
+          "W"
+        ],
+        "colors": [
+          "White"
+        ],
+        "id": "5e0cac455010129a6f44696f5c10d739cbe5d039",
+        "imageName": "wrath of god",
+        "layout": "normal",
+        "manaCost": "{2}{W}{W}",
+        "mciNumber": "229",
+        "multiverseid": 276,
+        "name": "Wrath of God",
+        "points": "20",
+        "rarity": "Rare",
+        "text": "Destroy all creatures. They can't be regenerated.",
+        "type": "Sorcery",
+        "types": [
+          "Sorcery"
+        ]
+      },
+      {
+        "artist": "Jeff A. Menges",
+        "cmc": 3,
+        "colorIdentity": [
+          "B"
+        ],
+        "colors": [
+          "Black"
+        ],
+        "flavor": "They say the Zombie Master controlled these foul creatures even before his own death, but now that he is one of them, nothing can make them betray him.",
+        "id": "a6c397e9c1979e66f8af4ab07cedeb240b9c223d",
+        "imageName": "zombie master",
+        "layout": "normal",
+        "manaCost": "{1}{B}{B}",
+        "mciNumber": "46",
+        "multiverseid": 93,
+        "name": "Zombie Master",
+        "points": "20",
+        "power": "2",
+        "rarity": "Rare",
+        "subtypes": [
+          "Zombie"
+        ],
+        "text": "Other Zombie creatures have swampwalk. (They can't be blocked as long as defending player controls a Swamp.)\nOther Zombies have \"{B}: Regenerate this permanent.\"",
+        "toughness": "3",
+        "type": "Creature — Zombie",
+        "types": [
+          "Creature"
+        ]
+      }
+    ]
+  }
+*/
+  var set = $.getJSON("LEA.json", function(json) {
+    console.log(json); // this will show the info it in firebug console
+});
 
 
-   $.getJSON("LEA.json", function(json) {
-      console.log(json); // this will show the info it in firebug console
-   });
+  window.onload = init;
+
+  function init() {
+
+    var i, leftCardElement;
+    for (i in set.cards) {
+        leftCardElement = document.createElement("p");
+      //  leftCardElement.setAttribute("id", "live-search-list");
+
+        leftCardElement.innerHTML = set.cards[i].points + "&nbsp;" + set.cards[i].name;
+        leftCardElement.addEventListener("click", leftCardClicked.bind(this, set.cards[i]));
+        leftCardElement.addEventListener("mouseover", cardHovered.bind(this, set.cards[i]));
+
+        document.getElementById("left-column").appendChild(leftCardElement);
+    }
+  }
+
+
+
+  $('.live-search-box').on('keyup', function(){
+    // remove every card from the list
+    var leftColumn = document.getElementById("left-column");
+    while (leftColumn.firstChild) {
+      leftColumn.removeChild(leftColumn.firstChild);
+    }
+
+    var searchTerm = $(this).val().toLowerCase();
+
+    $(set.cards).each(function() {
+
+      //var firstPartOfCardNameInList = this.name.substring(0, searchTerm.length);
+      //if ($(this.name).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
+
+      if (this.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
+      //if(searchTerm == firstPartOfCardNameInList.toLowerCase()) {
+        console.log("found");
+        leftCardElement = document.createElement("p");
+
+        leftCardElement.innerHTML = this.points + "&nbsp;" + this.name;
+        leftCardElement.addEventListener("click", leftCardClicked.bind(this, this));
+        leftCardElement.addEventListener("mouseover", cardHovered.bind(this, this));
+        //    $(this).show();
+        // } else {
+          //  $(this).hide();
+        //}
+        document.getElementById("left-column").appendChild(leftCardElement);
+
+      }
+
+    });
+
+  });
+
+  function cardHovered(card, event) {
+    var image = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + card.multiverseid + "&type=card";
+    document.getElementById("cardPreview").src = image;
+  }
+
+
+  function leftCardClicked(card, event) {
+    rightColumn = document.getElementById("right-column");
+
+    // use the card name to find the right card element if any
+    var rightCardElement = document.getElementById(card.name);
+
+    // add the cards points to the point tally
+    var pointCountNode = document.getElementById("point-count");
+    var currentPointCount = parseInt(pointCountNode.innerHTML.split("&nbsp")[0]);
+    var newPointTally = currentPointCount + parseInt(card.points);
+    pointCountNode.innerHTML = newPointTally + "&nbsp; Points";
+
+    // increment the card count
+    var cardCountNode = document.getElementById("card-count");
+    var currentCardCount = parseInt(cardCountNode.innerHTML.split("&nbsp")[0]);
+    currentCardCount++;
+    cardCountNode.innerHTML = currentCardCount + "&nbsp; Cards";
+
+    // if the card is already in the right column
+    if (rightCardElement) {
+
+      // scrape the number of copies of the right card element
+      var numberOfCopiesOfCard = parseInt(rightCardElement.innerHTML.split("&nbsp;")[3]);
+
+      numberOfCopiesOfCard++;
+
+      var totalPointsOfCardGroup = parseInt(card.points) * numberOfCopiesOfCard;
+
+      rightCardElement.innerHTML = totalPointsOfCardGroup + "&nbsp" + card.name + "&nbspx&nbsp" + numberOfCopiesOfCard;
+
+
+    }
+    else {
+      // if the right card element is not in the right column create it
+      rightCardElement = document.createElement("p");
+      rightCardElement.addEventListener("mouseover", cardHovered.bind(this, card));
+      rightCardElement.setAttribute("id", card.name);
+
+      rightCardElement.addEventListener("click", rightCardClicked);
+      rightCardElement.innerHTML = card.points + "&nbsp" + card.name + "&nbspx&nbsp1";
+      rightColumn.appendChild(rightCardElement);
+
+    }
+
+  }
+
+  function rightCardClicked(event) {
+
+    var rightCardElement = this;
+
+    var cardTextArray = rightCardElement.innerHTML.split("&nbsp;");
+
+    // scrape the number of points from the card text
+    var pointsOfCardAllCardCopies = cardTextArray[0];
+
+    // scrape the number of copies of the card from the card text
+    var numberOfCopiesOfCard = cardTextArray[3];
+
+    // scrape the name of the card
+    var nameOfCard = cardTextArray[1];
+
+    var numberOfPointsOfOneCardCopy = pointsOfCardAllCardCopies/numberOfCopiesOfCard;
+
+    // scrape the number of points from the Point count
+    var pointCountNode = document.getElementById("point-count");
+    var currentPointCount = parseInt(pointCountNode.innerHTML.split("&nbsp")[0]);
+
+    // subtract the cards points to the point tally
+    var pointString = currentPointCount - numberOfPointsOfOneCardCopy + "&nbsp; Points";
+    pointCountNode.innerHTML = pointString;
+
+    numberOfCopiesOfCard--;
+
+    // decrement the card count
+    var cardCountNode = document.getElementById("card-count");
+    var currentCardCount = parseInt(cardCountNode.innerHTML.split("&nbsp")[0]);
+    currentCardCount--;
+    cardCountNode.innerHTML = currentCardCount + "&nbsp; Cards";
+
+    if (numberOfCopiesOfCard == 0) {
+      document.getElementById("right-column").removeChild(this);
+    }
+    else {
+      var numberOfPointsOfAllCopies = numberOfPointsOfOneCardCopy * numberOfCopiesOfCard;
+      var newHTML = numberOfPointsOfAllCopies + "&nbsp" + nameOfCard + "&nbspx&nbsp" + numberOfCopiesOfCard;
+      rightCardElement.innerHTML = newHTML;
+    }
+
+  }
 
 
   </script>
